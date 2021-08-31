@@ -1,16 +1,16 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 if (process.argv.length < 3) {
     console.log("Usage: node mongo.js <password> <name> <number>")
 }
 
 const url =
-	`mongodb+srv://Saif:${process.argv[2]}@cluster0.8d2lb.mongodb.net/phonebook-app?retryWrites=true&w=majority`;
+	`mongodb+srv://Saif:${process.argv[2]}@cluster0.8d2lb.mongodb.net/phonebook-app?retryWrites=true&w=majority`
 
 mongoose.connect(url, {
-	useNewUrlParser: true,
+    useNewUrlParser: true,
     useUnifiedTopology: true
-});
+})
 
 const personSchema = new mongoose.Schema({
     name: String,
@@ -30,19 +30,19 @@ if (process.argv.length === 5) {
     })
 
     person.save().then((result) => {
-        console.log(`added ${name} number ${number} to phonebook`);
+        console.log(`added ${name} number ${number} to phonebook`)
         mongoose.connection.close()
     })
 
 } else if (process.argv.length ===3) {
 
     Person.find({})
-    .then((people) => {
-        console.log("phonebook:");
-        people.forEach((person) => {
-            console.log(`${person.name} ${person.number}`);
+        .then((people) => {
+            console.log("phonebook:")
+            people.forEach((person) => {
+                console.log(`${person.name} ${person.number}`)
             
+            })
+            mongoose.connection.close()
         })
-        mongoose.connection.close()
-    })
 }
